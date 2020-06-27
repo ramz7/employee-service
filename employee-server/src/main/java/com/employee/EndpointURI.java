@@ -23,6 +23,11 @@ public final class EndpointURI {
   public static final String EMPLOYEE = BASE_API_PATH + "employee";
   public static final String EMPLOYEES = BASE_API_PATH + "employees";
   public static final String EMPLOYEE_BY_ID = EMPLOYEE + ID;
+  
+  /* Employee Family Details API */
+  public static final String EMPLOYEE_FAMILY_DETAIL = BASE_API_PATH + "employee-family-detail";
+  public static final String EMPLOYEE_FAMILY_DETAILS = BASE_API_PATH + "employee-family-details";
+  public static final String EMPLOYEE_FAMILY_DETAIL_BY_ID = EMPLOYEE_FAMILY_DETAIL + ID;
 
   private EndpointURI() {
 

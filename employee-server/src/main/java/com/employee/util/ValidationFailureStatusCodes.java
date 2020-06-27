@@ -79,4 +79,26 @@ public class ValidationFailureStatusCodes {
   public void setDepartmentAlreadyExist(String departmentAlreadyExist) {
     this.departmentAlreadyExist = departmentAlreadyExist;
   }
+  
+  @Value("${validation.familyDetails.notExists}")
+  private String familyDetailsNotExist;
+
+  @Value("${validation.familyDetails.alreadyExist}")
+  private String familyDetailsAlreadyExist;
+
+  public String getFamilyDetailsNotExist() {
+    return familyDetailsNotExist;
+  }
+
+  public void setFamilyDetailsNotExist(String familyDetailsNotExist) {
+    this.familyDetailsNotExist = familyDetailsNotExist;
+  }
+
+  public String getFamilyDetailsAlreadyExist() {
+    return familyDetailsAlreadyExist;
+  }
+
+  public void setFamilyDetailsAlreadyExist(String familyDetailsAlreadyExist) {
+    this.familyDetailsAlreadyExist = familyDetailsAlreadyExist;
+  }
 }
