@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ import com.employee.rest.response.ValidationFailureResponse;
 import com.employee.server.services.EmployeeService;
 import com.employee.util.Constants;
 import com.employee.util.ValidationFailureStatusCodes;
-
+@CrossOrigin
 @RestController
 public class EmployeeController {
   @Autowired
@@ -43,7 +44,7 @@ public class EmployeeController {
           validationFailureStatusCodes.getEmployeeAlreadyExist()), HttpStatus.BAD_REQUEST);
     }
     Employee employee = mapper.map(employeeDto, Employee.class);
-    employeeService.createEmployee(employee);
+    employeeService.saveEmployee(employee);
     return new ResponseEntity<>(
         new BasicResponse<>(RestApiResponseStatus.OK, Constants.ADD_EMPLOYEE_SUCCESS),
         HttpStatus.OK);
@@ -76,7 +77,7 @@ public class EmployeeController {
         return new ResponseEntity<>(new ValidationFailureResponse(Constants.EMPLOYEE_EMAIL,
             validationFailureStatusCodes.getEmployeeAlreadyExist()), HttpStatus.BAD_REQUEST);
       }
-      employeeService.updateEmployee(mapper.map(employeeDto, Employee.class));
+      employeeService.saveEmployee(mapper.map(employeeDto, Employee.class));
       return new ResponseEntity<>(
           new BasicResponse<>(RestApiResponseStatus.OK, Constants.UPDATE_EMPLOYEE_SUCCESS),
           HttpStatus.OK);

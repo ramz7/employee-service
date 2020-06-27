@@ -1,64 +1,56 @@
 package com.employee.server.services;
 
 import java.util.List;
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.employee.data.entities.Employee;
 import com.employee.data.repositories.EmployeeRepository;
+
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
   @Autowired
   EmployeeRepository employeeRepository;
 
-  @Override
-  public void createEmployee(Employee employee) {
-    // TODO Auto-generated method stub
-
+  @Transactional
+  public void saveEmployee(Employee employee) {
+	  employeeRepository.save(employee);
   }
 
-  @Override
-  public void updateEmployee(Employee employee) {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
+  @Transactional(readOnly = true)
   public boolean isEmailExist(String email) {
-    // TODO Auto-generated method stub
-    return false;
+	  return employeeRepository.existsByEmail(email);
   }
 
-  @Override
+  @Transactional(propagation = Propagation.NEVER)
   public void deleteEmployee(Long id) {
-    // TODO Auto-generated method stub
-
+	  employeeRepository.deleteById(id);
   }
 
-  @Override
+  @Transactional(readOnly = true)
   public boolean isEmployeeExist(Long id) {
-    // TODO Auto-generated method stub
-    return false;
+	  return employeeRepository.existsById(id);
   }
 
-  @Override
+  @Transactional(readOnly = true)
   public Employee getEmployeeById(Long id) {
-    // TODO Auto-generated method stub
-    return null;
+	  return employeeRepository.findById(id).get();
   }
 
-  @Override
   public boolean isUpdatedEmployeeEmailExist(Long id, String email) {
-    // TODO Auto-generated method stub
-    return false;
+	  if ((!getEmployeeById(id).getEmail().equalsIgnoreCase(email)) && (isEmailExist(email))) {
+	      return true;
+	    }
+	    return false;
   }
 
-  @Override
+  @Transactional(readOnly = true)
   public List<Employee> getAllEmployees() {
-    // TODO Auto-generated method stub
-    return null;
+	  return  employeeRepository.findAll();
   }
-
-
-
 }

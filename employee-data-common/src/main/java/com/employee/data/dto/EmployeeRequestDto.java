@@ -23,9 +23,7 @@ public class EmployeeRequestDto {
   private Double salary;
   private Date hireDate;
   private String supervisorName;
-  @NotNull(message = "{employeeDto.department.null}")
-  @NotEmpty(message = "{employeeDto.department.empty}")
-  private String department;
+  private Long department;
   @NotNull(message = "{employeeDto.nic.null}")
   @NotEmpty(message = "{employeeDto.nic.empty}")
   private String nic;
@@ -110,11 +108,13 @@ public class EmployeeRequestDto {
     this.designationId = designationId;
   }
 
-  public String getDepartment() {
+ 
+
+  public Long getDepartment() {
     return department;
   }
 
-  public void setDepartment(String department) {
+  public void setDepartment(Long department) {
     this.department = department;
   }
 

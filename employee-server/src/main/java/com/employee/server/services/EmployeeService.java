@@ -4,9 +4,7 @@ import java.util.List;
 import com.employee.data.entities.Employee;
 
 public interface EmployeeService {
-  public void createEmployee(Employee employee);
-
-  public void updateEmployee(Employee employee);
+  public void saveEmployee(Employee employee);
 
   public boolean isEmailExist(String email);
 
