@@ -1,26 +1,13 @@
-package com.employee.data.entities;
+package com.employee.data.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(schema = "employee-system", name = "employee_family_detail")
-public class EmployeeFamilyDetail {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+public class EmployeeFamilyDetailDto {
   private Long id;
   private String fatherName;
   private String fatherJob;
   private String motherName;
   private String motherJob;
-  @OneToOne
-  @JoinColumn(name = "employeeId", nullable = false)
-  private Employee employee;
+  private Long employeeId;
+
   public Long getId() {
     return id;
   }
@@ -61,12 +48,11 @@ public class EmployeeFamilyDetail {
     this.motherJob = motherJob;
   }
 
-  public Employee getEmployee() {
-    return employee;
+  public Long getEmployeeId() {
+    return employeeId;
   }
 
-  public void setEmployee(Employee employee) {
-    this.employee = employee;
+  public void setEmployeeId(Long employeeId) {
+    this.employeeId = employeeId;
   }
-  
 }
