@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,9 +24,9 @@ import com.employee.rest.response.ValidationFailureResponse;
 import com.employee.rest.validation.ValidationFailure;
 import com.employee.server.services.DesignationService;
 import com.employee.util.Constants;
-import com.employee.util.ValidationConstance;
 import com.employee.util.ValidationFailureStatusCodes;
 
+@CrossOrigin
 @RestController
 public class DesignationController {
   @Autowired
@@ -87,12 +88,8 @@ public class DesignationController {
           new BasicResponse<>(RestApiResponseStatus.OK, Constants.DESIGNATION_DELETED),
           HttpStatus.OK);
     }
-    return new ResponseEntity<>(
-        new BasicResponse<>(
-            new ValidationFailure(Constants.DESIGNATION_NAME,
-                validationFailureStatusCodes.getDesignationNotExist()),
-            RestApiResponseStatus.VALIDATION_FAILURE, ValidationConstance.DESIGNATION_NOT_EXIST),
-        HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(new ValidationFailureResponse(Constants.DESIGNATION_ID,
+        validationFailureStatusCodes.getDesignationNotExist()), HttpStatus.BAD_REQUEST);
   }
 
   // UPDATE DESIGNATION
